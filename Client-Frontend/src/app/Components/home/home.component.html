@@ -1,0 +1,317 @@
+<div class="container mt-4">
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="text-danger text-center">
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <!-- Animated Typing Text -->
+  <h2
+    class="typing-text text-primary fw-bold text-center"
+    style="   -webkit-background-clip: text;
+      color: transparent;
+    "
+  >
+   Connecting Talent with Opportunities!..
+  </h2>
+
+  <!-- Loading Indicator -->
+  <div *ngIf="isLoading" class="text-center">
+    <p>Loading students...</p>
+  </div>
+
+  <!-- Search & Filter Section -->
+  <div class="search-filter card p-4 shadow-lg mt-3 my-2">
+    <div class="row">
+      <div class="col-md-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search students..."
+          [(ngModel)]="searchQuery"
+        />
+      </div>
+
+      <!-- Year Filter (2020 to 2030) -->
+      <div class="col-md-3 my-1">
+        <select class="form-select" [(ngModel)]="selectedYear">
+          <option value="">Select Year</option>
+          <option
+            *ngFor="
+              let year of [
+                2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024,
+                2025, 2026, 2027, 2028, 2029, 2030
+              ]
+            "
+            [value]="year"
+          >
+            {{ year }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Branch Filter -->
+      <div class="col-md-3 mt-1">
+        <select class="form-select" [(ngModel)]="selectedBranch">
+          <option value="">Select Branch</option>
+          <option value="CSE">CSE</option>
+          <option value="ECE">ECE</option>
+          <option value="IT">IT</option>
+          <option value="Mechanical">Mechanical</option>
+          <option value="Civil">Civil</option>
+        </select>
+      </div>
+
+      <!-- Employee Type Filter -->
+      <div class="col-md-3 mt-1">
+        <select class="form-select" [(ngModel)]="selectedEmployeeType">
+          <option value="">Select Employee Type</option>
+          <option value="Internship">Internship</option>
+          <option value="Full-Time">Full-Time</option>
+          <option value="Part-Time">Part-Time</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Student List -->
+  <div class="row mt-4 d-flex">
+    <div *ngFor="let student of filteredStudents()" class="col-md-4 mb-4">
+      <div
+        class="card shadow-sm d-flex flex-column justify-content-between h-100 bg-gradient-to-r from-blue-400 to-purple-500 p-4 rounded-lg"
+      >
+        <div class="row g-0">
+          <!-- Left Column (Image & Resume) -->
+          <div class="col-md-6 flex flex-col items-center text-center">
+            <img
+              [src]="student.image"
+              class="img rounded-circle student-image mb-3 w-24 h-24 object-cover shadow-lg"
+              alt="Student"
+            />
+
+            <!-- Show Resume Button if Resume Exists -->
+          </div>
+
+          <!-- Right Column (Student Details) -->
+          <div class="col-md-6 flex flex-col justify-between">
+            <div class="card-body">
+              <h5 class="card-title text-center mt-3 mb-5 text-white">
+                {{ student.company_name || "No Company" }}
+              </h5>
+              <div class="card-text-bg text-white">
+                <p class="card-text">
+                  <strong>Name:</strong> {{ student.name }}
+                </p>
+                <p class="card-text">
+                  <strong>Branch:</strong> {{ student.branch }}
+                </p>
+                <p class="card-text">
+                  <strong>Batch:</strong> {{ student.year }}
+                </p>
+                <p class="card-text">
+                  <strong>Employee Type:</strong> {{ student.employee_type }}
+                </p>
+              </div>
+            </div>
+
+            <!-- LinkedIn, Like, and Download Resume Buttons (Side by Side) -->
+            <div class="flex justify-between gap-x-2 mt-3">
+              <!-- LinkedIn Button -->
+              <a [href]="student.linkedin" target="_blank" class="w-800px">
+                <button class="btn btn-info btn-sm w-100">
+                  <i class="fab fa-linkedin"></i>
+                </button>
+              </a>
+
+              <!-- Like Button -->
+              <button class="btn btn-warning btn-sm">
+                <i class="fas fa-heart"></i>
+              </button>
+              <div *ngIf="student.resume">
+                <a [href]="'http://localhost:3100' + student.resume" download>
+                  <button class="btn btn-success btn-sm w-100">
+                    <i class="fas fa-download"></i>
+                  </button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- No Students Found Message -->
+    <div
+      *ngIf="filteredStudents().length === 0 && !isLoading"
+      class="col-md-12 text-center mt-4"
+    >
+      <h4 class="text-white">No students found matching the filters.</h4>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- "Thousands of students achieved their dream job at" Section -->
+  <div class="mt-4">
+    <h2 class="text-center text-lg font-bold">
+      Thousands of students achieved their
+      <span class="text-blue-700">dream job at</span>
+    </h2>
+
+    <!-- Company Logos (Grid Layout) -->
+    <div
+      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 text-center mt-2"
+    >
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img
+          src="../../../assets/images/amazonlogo.png"
+          alt="Amazon"
+          class="h-12"
+        />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img
+          src="../../../assets/images/google.png"
+          alt="Google"
+          class="h-12"
+        />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img
+          src="../../../assets/images/microsoft.png"
+          alt="Microsoft"
+          class="h-12"
+        />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img
+          src="../../../assets/images/Samsung.png"
+          alt="Samsung"
+          class="h-12"
+        />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img
+          src="../../../assets/images/airtel.png"
+          alt="Airtel"
+          class="h-12"
+        />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img src="../../../assets/images/Dell.png" alt="Dell" class="h-12" />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img
+          src="../../../assets/images/Deloitte.png"
+          alt="Deloitte"
+          class="h-12"
+        />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img src="../../../assets/images/EY.png" alt="EY" class="h-12" />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img
+          src="../../../assets/images/GoldmanSachs.png"
+          alt="GoldmanSachs"
+          class="h-12"
+        />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img
+          src="../../../assets/images/Hitachi.png"
+          alt="Hitachi"
+          class="h-12"
+        />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img src="../../../assets/images/IBM.png" alt="IBM" class="h-12" />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img src="../../../assets/images/Isro.png" alt="Isro" class="h-12" />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img
+          src="../../../assets/images/JpMorgan.png"
+          alt="JpMorgan"
+          class="h-12"
+        />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img src="../../../assets/images/KPMG.png" alt="KPMG" class="h-12" />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img
+          src="../../../assets/images/Mercedes-Benz.png"
+          alt="Mercedes-Benz"
+          class="h-12"
+        />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img
+          src="../../../assets/images/NetApp.png"
+          alt="NetApp"
+          class="h-12"
+        />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img
+          src="../../../assets/images/PayPal.png"
+          alt="PayPal"
+          class="h-12"
+        />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img
+          src="../../../assets/images/salesDorce.png"
+          alt="salesforce"
+          class="h-12"
+        />
+      </div>
+    </div>
+
+    <!-- "See More" Button -->
+    <div class="text-center mt-6">
+      <a
+        href="#more-companies"
+        class="text-blue-500 text-lg font-semibold hover:underline"
+        >+See More</a
+      >
+    </div>
+  </div>
+</div>

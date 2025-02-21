@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="header">
+    <h1>AI Powered Mock Interview</h1>
+  </div>
+
+  <!-- Chat Window -->
+  <div class="chat-window">
+    <div class="messages" *ngIf="messages && messages.length">
+      <div *ngFor="let message of messages" [ngClass]="message.isUser ? 'user-message' : 'ai-message'">
+        <p>{{ message.text }}</p>
+      </div>
+    </div>
+
+    <!-- Loading indicator -->
+    <div *ngIf="isLoading" class="loading">
+      <p>Loading...</p>
+    </div>
+  </div>
+
+  <!-- Input and Submit -->
+  <div class="footer">
+    <input [(ngModel)]="prompt" placeholder="Enter your prompt..." (keydown.enter)="getGeminiResponse()"  />
+    <button (click)="getGeminiResponse()" [disabled]="isLoading">Submit</button>
+  </div>
+
+  <!-- JotForm Agent Widget -->
+  <div class="chat-widget-container">
+    <!-- JotForm agent will load here automatically -->
+  </div>
+</div>

@@ -1,0 +1,165 @@
+/* Typing Effect */
+.typing-text {
+  display: inline-block;
+  /* border-right: 2px solid; */
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: x-large;
+  /* animation: typing 3s steps(30, end) 1, blink 0.7s infinite step-end; */
+}
+
+
+
+
+/* Reverse Typing animation */
+@keyframes reverseTyping {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0;
+  }
+}
+
+/* Card Styling */
+.card {
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  height: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  position: relative;
+  min-height: 300px; /* Ensures consistency in all screen sizes */
+  max-height: 300px;
+}
+
+/* Card Hover Effect */
+.card:hover {
+  transform: scale(1.05);
+}
+
+/* Company Name - Always at Top Center with Light Grey Background */
+.card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  text-align:left;
+  background-color: #dbd8d84f; /* Light Grey */
+  padding: 6px 0 5px ;
+  border-radius: 5px;
+}
+
+/* Student Image - Takes 50% Width */
+.student-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  /* border: 2px solid #fff; */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Student Details - Takes 50% Width */
+.card-body {
+  flex-grow: 1;
+  width: 100%;
+  padding-top: 60px; /* Space from company name */
+  text-align: left;
+  padding-left: 6px;
+}
+
+/* Student Details Text */
+.card-text {
+  margin-bottom: 5px;
+}
+
+/* Stipend - Always at Bottom Center */
+.text-success {
+  color: green;
+  font-weight: bold;
+  position: absolute;
+  bottom: 35px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
+}
+
+/* Half Image - Half Details */
+.row.g-0 {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  flex-wrap: nowrap;
+}
+
+.col-md-6 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex: 1;
+}
+
+/* Responsive Fix */
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
+    min-height: 300px;
+    max-height: 300px;
+  }
+
+  .student-image {
+    width: 65%;
+    height: 50%;
+  }
+
+  .card-body {
+    padding-top: 70px;
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+  }
+}
+
+.search-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Adds space between elements */
+  width: 100%;
+  max-width: 100%;
+  min-height: auto; /* Auto height adjustment */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #8136d1, #3070df); /* Blue and Purple Gradient */
+  border-radius: 10px; /* Optional: Adds rounded corners */
+  padding: 20px; /* Optional: Adds padding inside the box */
+}
+
+.search-filter .row {
+  align-items: center;
+}
+
+.search-filter input,
+.search-filter select {
+  height: 38px; /* Standard input height */
+}
+
+
+
+/* .card-text-bg{
+  background-color: #eee4e446; 
+  border-bottom-left-radius: 9px;
+  border-top-left-radius: 9px;
+} */
+
+h2.typing-text {
+  overflow: hidden; /* Prevents overflow of the typing text */
+  white-space: nowrap; /* Ensures text stays in a single line */
+}

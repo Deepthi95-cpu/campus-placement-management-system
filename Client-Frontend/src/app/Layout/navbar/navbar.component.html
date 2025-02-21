@@ -1,0 +1,109 @@
+<nav class="bg-blue-900 text-white p-2">
+  <div class="container mx-auto flex justify-between items-center">
+    <!-- Campus Connect with Icon -->
+    <a
+      class="text-xl font-bold uppercase bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent transition-transform duration-300 hover:scale-110 flex items-center gap-2"
+      routerLink="home"
+    >
+      <i class="fas fa-graduation-cap text-blue-400"></i>
+      CAMPUS CONNECT
+    </a>
+
+    <!-- Mobile Menu Button -->
+    <button class="md:hidden" (click)="toggleNavbar($event)">
+      <svg
+        class="w-6 h-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16m-7 6h7"
+        ></path>
+      </svg>
+    </button>
+
+    <!-- Navbar Items -->
+    <div
+      #navbarMenu
+      [ngClass]="{ hidden: !isNavbarOpen, block: isNavbarOpen }"
+      class="md:flex md:space-x-4 md:space-y-0 md:bg-transparent"
+    >
+      <ng-container *ngIf="isLoggedIn">
+        <a
+          class="block py-2 px-4 hover:bg-gray-700 rounded"
+          routerLink="home"
+          (click)="closeNavbar()"
+          >Home</a
+        >
+        <a
+          class="block py-2 px-4 hover:bg-gray-700 rounded"
+          routerLink="/aiPoweredMockInterview"
+          (click)="closeNavbar()"
+          >AI Mock Interview</a
+        >
+        <a
+          class="block py-2 px-4 hover:bg-gray-700 rounded"
+          routerLink="/AiPoweredResumeReview"
+          (click)="closeNavbar()"
+          >AI Resume Review</a
+        >
+        <a
+          class="block py-2 px-4 hover:bg-gray-700 rounded"
+          routerLink="/Feedback"
+          (click)="closeNavbar()"
+          >Feedback</a
+        >
+
+        <!-- Profile Dropdown -->
+        <div class="relative profile-dropdown">
+          <button
+            (click)="toggleDropdown($event)"
+            class="block py-2 px-4 hover:bg-gray-700 rounded"
+          >
+            <i class="fas fa-user mx-1"></i> {{ username | uppercase }}
+          </button>
+
+          <div
+            *ngIf="isDropdownOpen"
+            class="absolute right-0 mt-2 w-48 bg-white text-black rounded shadow-lg"
+          >
+            <a
+              class="block px-4 py-2 hover:bg-gray-200"
+              routerLink="/student-details"
+              (click)="closeNavbar()"
+            >
+              Create Account</a
+            >
+            <a
+              class="block px-4 py-2 hover:bg-gray-200 cursor-pointer"
+              (click)="logout(); closeNavbar()"
+              >Log out</a
+            >
+          </div>
+        </div>
+      </ng-container>
+
+      <!-- Show login/signup if not logged in -->
+      <ng-container *ngIf="!isLoggedIn">
+        <div class="flex space-x-2">
+          <a
+            class="py-1 px-3 bg-blue-500 hover:bg-blue-700 text-white rounded"
+            routerLink="/login"
+            (click)="closeNavbar()"
+            >Login</a
+          >
+          <a
+            class="py-1 px-3 bg-blue-500 hover:bg-blue-700 text-white rounded"
+            routerLink="/register"
+            (click)="closeNavbar()"
+            >Signup</a
+          >
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</nav>

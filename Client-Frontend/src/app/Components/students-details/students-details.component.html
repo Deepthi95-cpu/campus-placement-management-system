@@ -1,0 +1,241 @@
+<div class="container light-style flex-grow-1 container-p-y">
+  <h4 class="font-weight-bold py-3 mb-4">Account settings</h4>
+
+  <div class="card overflow-hidden">
+    <div class="row no-gutters row-bordered row-border-light">
+      <div class="w-full md:w-1/4 pt-0">
+        <div
+          class="list-group list-group-flush account-settings-links cursor-pointer flex md:block"
+        >
+          <a class="list-group-item list-group-item-action active">General</a>
+
+          <div class="relative inline-block">
+            <a
+              class="list-group-item list-group-item-action cursor-pointer"
+              (mouseenter)="showDialog = true"
+              (mouseleave)="showDialog = false"
+            >
+              Change password
+            </a>
+
+            <!-- Dialog Box (Visible on Hover) -->
+            <div
+              *ngIf="showDialog"
+              class="absolute left-2px ml-5 mt-2 w-48 bg-white shadow-lg rounded-lg p-4 border border-gray-200 text-gray-800"
+            >
+              <p>🚧 Under Implementation</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-9">
+        <div class="tab-content">
+          <div class="tab-pane fade active show" id="account-general">
+            <div class="card-body profile-container">
+              <!-- Profile Image -->
+              <img
+                src="https://img.freepik.com/premium-vector/profiling-flat-illustration_120816-75323.jpg"
+                alt=""
+                class="ui-w-80"
+              />
+
+              <!-- Upload Section -->
+              <div class="upload-box">
+                <label class="btn btn-outline-primary disabled">
+                  Upload new photo
+                  <input
+                    type="file"
+                    class="account-settings-fileinput"
+                    disabled
+                  />
+                </label>
+              </div>
+
+              <!-- Reset Button on Right Side -->
+              <!-- <button
+                type="button"
+                class="btn btn-default md-btn-flat reset-btn"
+              >
+                Reset
+              </button> -->
+            </div>
+
+            <hr class="border-light m-0" />
+
+            <!-- New Form Section -->
+            <div class="card-body">
+              <form
+                (ngSubmit)="onSubmit()"
+                #studentForm="ngForm"
+                class="row g-3"
+              >
+                <!-- Name -->
+                <div class="col-md-6">
+                  <label for="name" class="form-label">Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    required
+                    [(ngModel)]="student.name"
+                    name="name"
+                    placeholder="Enter your name"
+                  />
+                </div>
+
+                <!-- Branch -->
+                <div class="col-md-6">
+                  <label for="branch" class="form-label">Branch</label>
+                  <select
+                    class="form-select"
+                    [(ngModel)]="student.branch"
+                    name="branch"
+                    required
+                  >
+                    <option value="">Select Branch</option>
+                    <option value="CSE">CSE</option>
+                    <option value="ECE">ECE</option>
+                    <option value="IT">IT</option>
+                    <option value="Mechanical">Mechanical</option>
+                    <option value="Civil">Civil</option>
+                  </select>
+                </div>
+
+                <!-- Year -->
+                <div class="col-md-6">
+                  <label for="year" class="form-label">Year</label>
+                  <select
+                    class="form-select"
+                    [(ngModel)]="student.year"
+                    name="year"
+                    required
+                  >
+                    <option value="">Select Year</option>
+                    <option *ngFor="let year of years" [value]="year">
+                      {{ year }}
+                    </option>
+                  </select>
+                </div>
+
+                <!-- Image URL -->
+                <div class="col-md-6">
+                  <label for="image" class="form-label">Image URL</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="image"
+                    [(ngModel)]="student.image"
+                    name="image"
+                    placeholder="Enter image URL"
+                  />
+                </div>
+
+                <!-- Company Name -->
+                <div class="col-md-6">
+                  <label for="company_name" class="form-label"
+                    >Company Name</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="company_name"
+                    [(ngModel)]="student.company_name"
+                    name="company_name"
+                    placeholder="Enter company name"
+                  />
+                </div>
+
+                <!-- Employee Type -->
+                <div class="col-md-6">
+                  <label for="employee_type" class="form-label"
+                    >Employee Type</label
+                  >
+                  <select
+                    class="form-select"
+                    [(ngModel)]="student.employee_type"
+                    name="employee_type"
+                    required
+                  >
+                    <option value="">Employee Type</option>
+                    <option value="Internship">Internship</option>
+                    <option value="Part-Time">Part-Time</option>
+                    <option value="Full-Time">Full-Time</option>
+                  </select>
+                </div>
+
+                <!-- LinkedIn -->
+                <div class="col-md-6">
+                  <label for="linkedin" class="form-label">LinkedIn</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="linkedin"
+                    [(ngModel)]="student.linkedin"
+                    name="linkedin"
+                    placeholder="Enter LinkedIn URL"
+                  />
+                </div>
+
+                <!-- GitHub -->
+                <div class="col-md-6">
+                  <label for="github" class="form-label">GitHub</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="github"
+                    [(ngModel)]="student.github"
+                    name="github"
+                    placeholder="Enter GitHub URL"
+                  />
+                </div>
+
+                <!-- Resume Upload -->
+                <div class="col-md-6">
+                  <label for="resume" class="form-label">Resume (PDF)</label>
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="resume"
+                    (change)="onResumeChange($event)"
+                    accept="application/pdf"
+                  />
+                </div>
+
+                <!-- Hidden user_id -->
+                <input
+                  type="hidden"
+                  [(ngModel)]="student.user_id"
+                  name="user_id"
+                />
+
+                <!-- Buttons -->
+                <!-- Buttons in a row -->
+                <div class="col-md-12 mt-3 flex justify-end items-end gap-x-4">
+                  <!-- Save Button -->
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    [disabled]="studentForm.invalid"
+                  >
+                    {{ isEditing ? "Save Changes" : "Save Student" }}
+                  </button>
+
+                  <!-- Delete Button (if Editing) -->
+                  <button
+                    *ngIf="isEditing"
+                    type="button"
+                    class="btn btn-danger"
+                    (click)="onDelete()"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
