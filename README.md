@@ -9,7 +9,7 @@ This guide will help you set up the **Campus-Connect** project on your local mac
 Open your terminal and run the following command to clone the project:
 
 ```bash
-git clone https://github.com/AGuptaWorks01/Campus-connect.git
+git clone https://github.com/vineetajaiswal/Campus-connect.git
 ```
 
 Once the cloning is complete, navigate to the **Campus-Connect** project directory:
