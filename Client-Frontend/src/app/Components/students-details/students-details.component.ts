@@ -25,6 +25,7 @@ export class StudentsDetailsComponent implements OnInit {
     name: '',
     branch: '',
     year: '',
+    cgpa: 0,
     image: '',
     company_name: '',
     employee_type: '',
@@ -37,6 +38,7 @@ export class StudentsDetailsComponent implements OnInit {
   isEditing: boolean = false;
   userId: number = 0; // Replace with actual logged-in user ID
   years: number[] = [];
+  cgpas: number[] = [];
   showDialog = false;
   resumeFile: File | null = null;  // Property to hold the selected file
 
@@ -50,6 +52,8 @@ export class StudentsDetailsComponent implements OnInit {
     this.userId = parseInt(this.authService.getUserId() || '0') // Dynamically get userId from AuthService
     this.student.user_id = this.userId;
     this.years = Array.from({ length: 16 }, (_, index) => 2015 + index); // Generate years from 2015 to 2025
+    this.cgpas = Array.from({ length: 90 }, (_, i) => parseFloat((i * 0.1 + 1).toFixed(1)));
+
 
     /// Check if user already has a student record
     this.studentsService.getStudents().subscribe((students) => {
@@ -67,6 +71,7 @@ export class StudentsDetailsComponent implements OnInit {
     formData.append('name', this.student.name);
     formData.append('branch', this.student.branch);
     formData.append('year', this.student.year);
+    formData.append('cgpa', this.student.cgpa?.toString() || '0');
     formData.append('company_name', this.student.company_name);
     formData.append('employee_type', this.student.employee_type);
     formData.append('linkedin', this.student.linkedin);
@@ -104,6 +109,7 @@ export class StudentsDetailsComponent implements OnInit {
           name: '',
           branch: '',
           year: '',
+          cgpa: 0,
           image: '',
           company_name: '',
           employee_type: '',

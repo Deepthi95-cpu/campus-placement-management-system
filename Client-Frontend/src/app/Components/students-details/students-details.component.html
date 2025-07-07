@@ -94,11 +94,11 @@
                     required
                   >
                     <option value="">Select Branch</option>
-                    <option value="CSE">CSE</option>
-                    <option value="ECE">ECE</option>
+                    <option value="CE">CE</option>
+                    <option value="ENC">ENC</option>
                     <option value="IT">IT</option>
-                    <option value="Mechanical">Mechanical</option>
-                    <option value="Civil">Civil</option>
+                    <option value="CST">CST</option>
+                    <option value="DS">DS</option>
                   </select>
                 </div>
 
@@ -117,6 +117,23 @@
                     </option>
                   </select>
                 </div>
+
+                <!-- CGPA -->
+                <div class="col-md-6">
+                  <label for="cgpa" class="form-label">CGPA</label>
+                  <select
+                    class="form-select"
+                    [(ngModel)]="student.cgpa"
+                    name="cgpa"
+                    required
+                  >
+                    <option value="">Select CGPA</option>
+                    <option *ngFor="let cgpa of cgpas" [value]="cgpa">
+                      {{ cgpa }}
+                    </option>
+                  </select>
+                </div>
+
 
                 <!-- Image URL -->
                 <div class="col-md-6">
@@ -159,7 +176,6 @@
                   >
                     <option value="">Employee Type</option>
                     <option value="Internship">Internship</option>
-                    <option value="Part-Time">Part-Time</option>
                     <option value="Full-Time">Full-Time</option>
                   </select>
                 </div>

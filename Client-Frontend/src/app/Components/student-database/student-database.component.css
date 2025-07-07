@@ -1,0 +1,70 @@
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+  color: #1e40af;
+  background: linear-gradient(to right, #7c3aed, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+}
+
+/* Horizontal Gradient Filter Bar */
+.search-filter {
+  background: linear-gradient(to right, #7c3aed, #3b82f6);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.search-filter .form-control,
+.search-filter .form-select {
+  border-radius: 6px;
+  min-width: 100%;
+  box-shadow: none;
+  border: none;
+  padding: 0.5rem 0.75rem;
+}
+
+/* Table Style */
+.table-auto {
+  width: 100%;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.table-auto th,
+.table-auto td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.table-auto th {
+  background-color: #f1f5f9;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.table-auto tr:hover {
+  background-color: #f9fafb;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .search-filter .row > div {
+    margin-bottom: 10px;
+  }
+
+  .table-auto th,
+  .table-auto td {
+    padding: 10px;
+  }
+}

@@ -3,6 +3,7 @@ export interface Student {
     name: string;
     branch: string;
     year: string;
+    cgpa: 0,
     image: string;
     company_name: string;
     employee_type: string;
@@ -10,4 +11,5 @@ export interface Student {
     github: string;
     user_id: number;
     resume?: string;  // Optional field for the resume URL
+    backlogs?: number;
 }

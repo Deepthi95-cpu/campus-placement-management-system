@@ -1,0 +1,85 @@
+<div class="container mt-4">
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="text-danger text-center">
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <!-- Animated Typing Text -->
+  <h2
+    class="typing-text text-primary fw-bold text-center"
+    style="   -webkit-background-clip: text;
+      color: transparent;
+    "
+  >
+   Student Database
+  </h2>
+
+  <!-- Loading Indicator -->
+  <div *ngIf="isLoading" class="text-center">
+    <p>Loading students...</p>
+  </div>
+
+    <!-- Search & Filter Section -->
+  <div class="search-filter card p-4 shadow-lg mt-3 my-2">
+    <div class="row">
+      <div class="col-md-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search students..."
+          [(ngModel)]="searchQuery"
+        />
+      </div>
+
+      <!-- Year Filter (3 & 4) -->
+      <div class="col-md-3 my-1">
+        <select class="form-select" [(ngModel)]="selectedYear">
+          <option value="">Select Year</option>
+          <option value="3">3rd</option>
+          <option value="4">4th</option>
+        </select>
+      </div>
+
+    <!-- Branch Filter -->
+      <div class="col-md-3 mt-1">
+        <select class="form-select" [(ngModel)]="selectedBranch">
+          <option value="">Select Branch</option>
+          <option value="CE">CE</option>
+          <option value="ENC">ENC</option>
+          <option value="IT">IT</option>
+          <option value="DS">DS</option>
+          <option value="CST">CST</option>
+        </select>
+      </div>
+
+      <!-- CGPA Filter -->
+      <div class="col-md-3 mt-1">
+        <select class="form-select" [(ngModel)]="selectedCgpa">
+          <option value="">Select CGPA</option>
+          <option *ngFor="let cgpa of cgpaOptions" [value]="cgpa">
+            {{ cgpa }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Backlog Filter -->
+      <div class="col-md-3 mt-1">
+        <select class="form-select" [(ngModel)]="selectedBacklogs">
+          <option value="">All</option>
+          <option value="false">No Backlogs</option>
+          <option value="true">Has Backlogs</option> 
+        </select>
+      </div>
+
+  <table class="table-auto w-full border">
+    <tbody>
+      <tr *ngFor="let student of filteredStudents()">
+        <td class="border px-4 py-2">{{ student.name }}</td>
+        <td class="border px-4 py-2">{{ student.branch }}</td>
+        <td class="border px-4 py-2">{{ student.cgpa }}</td>
+        <td class="border px-4 py-2">{{ student.backlogs ? 'Yes' : 'No' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

@@ -7,6 +7,7 @@ import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { ForgetPasswordComponent } from './Components/forget-password/forget-password.component';
 import { ResetPasswordComponent } from './Components/reset-password/reset-password.component';
+import { StudentDatabaseComponent } from './Components/student-database/student-database.component';
 import { AuthGuard } from './AuthGuard/auth.guard';
 
 export const routes: Routes = [
@@ -63,5 +64,10 @@ export const routes: Routes = [
     path: 'student-details',
     loadComponent: () => import('./Components/students-details/students-details.component').then((m) => m.StudentsDetailsComponent),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'student-database',
+    loadComponent: () => import('./Components/student-database/student-database.component').then((m) => m.StudentDatabaseComponent),
+    canActivate: [AuthGuard] 
   },
 ];
